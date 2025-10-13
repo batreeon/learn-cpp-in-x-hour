@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <fstream>
+
 using namespace std;
 
 class String {
@@ -69,6 +69,11 @@ int main() {
     cout << "B: " << B << endl;
 
     A = B = "456";
+    // Test output operator
+    cout << "A: " << A << endl;
+    cout << "B: " << B << endl;
+
+
     B = B;
     // Test output operator
     cout << "A: " << A << endl;

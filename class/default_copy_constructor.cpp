@@ -10,11 +10,6 @@ public:
     Vector(std::initializer_list<double>);
     ~Vector() { delete[] elem; }
 
-    // 拷贝构造函数
-    Vector(const Vector& v);
-    // 拷贝赋值运算符
-    Vector& operator=(const Vector& v);
-
     double& operator[](int i){ return elem[i]; }
     const double& operator[](int i) const {return elem[i]; }
 
@@ -27,22 +22,6 @@ public:
 
 Vector::Vector(std::initializer_list<double> lst): elem{new double[lst.size()]}, sz{lst.size()} {
     std::copy(lst.begin(), lst.end(), elem);
-}
-
-Vector::Vector(const Vector& v): elem{new double[v.sz]}, sz{v.sz}{
-    for (int i = 0; i < v.sz; ++i) {
-        elem[i] = v.elem[i];
-    }
-}
-
-Vector& Vector::operator=(const Vector& v) {
-    delete[] elem;
-    double *elem = new double[v.sz];
-    for (int i = 0; i < v.sz; ++i) {
-        elem[i] = v[i];
-    }
-    sz = v.sz;
-    return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, const Vector& v){
