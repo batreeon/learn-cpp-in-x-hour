@@ -1,46 +1,55 @@
 #include <iostream>
-#include <list> // for list functions
-using namespace std;
+#include <list>
 
-// Driver Code
 int main()
 {
-    // Initializing list1
-    list<int> gqlist1 = { 1, 1, 1, 2, 2, 3, 3, 4 };
+    std::list<int> l1;
+    std::list<int> l2(2, 5);
+    std::list<int> l3 = {1, 2, 3, 4, 5};
 
-    // Initializing list2
-    list<int> gqlist2 = { 2, 4, 6 };
+    std::cout << l3.front() << " " << l3.back() << " " << l3.size() << std::endl;
 
-    // Initializing list1 iterator
-    list<int>::iterator it = gqlist1.begin();
+    l3.push_front(0);
+    l3.push_back(6);
 
-    // using advance() to increment iterator position
-    advance(it, 3);
+    // 0 1 2 3 4 5 6
 
-    // Displaying list elements
-    cout << "list1 before unique operation is : ";
-    for (int& x : gqlist1)
-        cout << x << " ";
-    cout << endl;
+    auto it = l3.begin(); // 0
+    ++it; // 1
+    l3.insert(it, 10); // 0 10 1 2 3 4 5 6
 
-    // using unique() to remove repeating elements
-    gqlist1.unique();
+    advance(it, 3); // 4
+    l3.erase(it); // 0 10 1 2 3 5 6
 
-    // Displaying list elements
-    cout << "list1 after unique operation is : ";
-    for (int& x : gqlist1)
-        cout << x << " ";
-    cout << endl << endl;
+    std::cout << *next(l3.begin(), 2) << std::endl; // 1
 
-    // using splice() to splice list2 in list1 at position
-    // it inserts list2 after 2nd position
-    gqlist1.splice(it, gqlist2);
+    it = l3.begin(); // 0
+    advance(it, 4); // 3
+    *it = 4; // 0 10 1 2 4 5 6
+    for (const auto& val : l3)
+    {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
 
-    // Displaying list elements
-    cout << "list1 after splice operation is : ";
-    for (int& x : gqlist1)
-        cout << x << " ";
-    cout << endl;
+    it = std::find(l3.begin(), l3.end(), 10);
+    std::cout << (it != l3.end()) << std::endl; // 1
+    l3.erase(it); // 0 1 2 4 5 6
+    for (const auto& val : l3)
+    {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+
+    l3.pop_front(); // 1 2 4 5 6
+    l3.pop_back(); // 1 2 4 5
+
+    // size, empty, rbegin, rend, clear
+
+    // emplace_front, emplace_back, emplace, 
+    // merge
+    // remove, remove_if
+    // unique, splice, swap, sort, reverse
 
     return 0;
 }
